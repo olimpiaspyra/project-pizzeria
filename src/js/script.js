@@ -58,7 +58,11 @@
       thisProduct.id = id;
       thisProduct.data = data;
       thisProduct.renderInMenu();
+      thisProduct.getElements();
+      thisProduct.initOrderForm();
+      thisProduct.processOrder();
       thisProduct.initAccordion();
+
 
       console.log ('new product:', thisProduct);
 
@@ -85,17 +89,32 @@
 
     }
 
+    getElements () {
+      const thisProduct = this;
+
+      thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      console.log ('accordion trigger:', thisProduct.accordionTrigger);
+      thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
+      console.log ('form:', thisProduct.form);
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
+      console.log ('form inputs:', thisProduct.formInputs);
+      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
+      console.log('cars button:', thisProduct.cartButton);
+      thisProduct.priceElem = document.querySelector(select.menuProduct.priceElem);
+      console.log ('price elem:', thisProduct.priceElem);
+    }
+
     initAccordion () {
       const thisProduct = this;
 
       /* find the clickable trigger (the element that should be clicking */
 
-      const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
-      console.log ('clickable trigger:', clickableTrigger);
+      // const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      // console.log ('clickable trigger:', clickableTrigger);
 
       /* START: add event listener to clickable trigger on event click */
 
-      clickableTrigger.addEventListener('click', function (event) {
+      thisProduct.accordionTrigger.addEventListener('click', function (event) {
 
         /* prevent default action for event */
 
@@ -119,6 +138,97 @@
         thisProduct.element.classList.toggle('active');
 
       });
+    }
+
+    initOrderForm () {
+      const thisProduct = this;
+      console.log('init order form:', this.initOrderForm);
+
+      thisProduct.form.addEventListener ('submit', function (event) {
+        event.preventDefault ();
+        thisProduct.processOrder ();
+      });
+
+      for (let input of thisProduct.formInputs) {
+        input.addEventListener ('change', function () {
+          thisProduct.processOrder ();
+        });
+      }
+      thisProduct.cartButton.addEventListener ('click', function (event) {
+        event.preventDefault ();
+        thisProduct.processOrder ();
+      });
+    }
+
+    processOrder () {
+      const thisProduct = this;
+      console.log ('process order:', this.processOrder);
+
+      // covert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
+
+      const formData = utils.serializeFormToObject (thisProduct.form);
+      console.log ('form data:', formData);
+
+      // set price to default price
+
+      let price = thisProduct.data.price;
+
+      // for every category (param)...
+
+      for (let paramId in thisProduct.data.params) {
+
+        // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
+
+        const param = thisProduct.data.params[paramId];
+        console.log ('param id:', paramId);
+        console.log ('param:', param);
+
+        // for every option in this category
+
+        for (let optionId in param.options) {
+
+          // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
+
+          const option = param.options[optionId];
+          console.log ('option id:', optionId);
+          console.log ('option:', option);
+
+          const optionPrice = option.price;
+          console.log ('option price:', optionPrice);
+
+          // check if there is param with a name of paramId in formData and if it includes optionId
+
+          if (formData[paramId] && formData[paramId].includes(optionId)) {
+
+            // check if the option is not default
+
+            if (optionId !== option.default) {
+
+              // add option price to price variable
+
+              price += optionPrice;
+              console.log ('price increase:', price);
+            }
+          } else {
+
+            // check if the option is default
+
+            if (optionId === option.default) {
+
+              // reduce price variable
+
+              price -= optionPrice;
+              console.log ('price decrease:', price);
+            }
+          }
+        }
+      }
+
+      // update calculated price in the HTML
+
+      thisProduct.priceElem.innerHTML = price;
+      console.log ('actual price:', thisProduct.priceElem);
+
     }
   }
 
