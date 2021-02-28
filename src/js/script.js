@@ -63,7 +63,6 @@
       thisProduct.processOrder();
       thisProduct.initAccordion();
 
-
       console.log ('new product:', thisProduct);
 
     }
@@ -100,7 +99,7 @@
       console.log ('form inputs:', thisProduct.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       console.log('cars button:', thisProduct.cartButton);
-      thisProduct.priceElem = document.querySelector(select.menuProduct.priceElem);
+      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       console.log ('price elem:', thisProduct.priceElem);
     }
 
@@ -191,7 +190,7 @@
 
           const option = param.options[optionId];
           console.log ('option id:', optionId);
-          console.log ('option:', option);
+          // console.log ('option:', option);
 
           const optionPrice = option.price;
           console.log ('option price:', optionPrice);
