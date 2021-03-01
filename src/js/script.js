@@ -56,6 +56,7 @@
     constructor (id, data) {
       const thisProduct = this;
       thisProduct.id = id;
+      console.log('product id:', thisProduct.id);
       thisProduct.data = data;
       thisProduct.renderInMenu();
       thisProduct.getElements();
@@ -192,7 +193,7 @@
 
           const option = param.options[optionId];
           console.log ('option id:', optionId);
-          // console.log ('option:', option);
+          console.log ('option:', option);
 
           const optionPrice = option.price;
           console.log ('option price:', optionPrice);
@@ -205,7 +206,7 @@
 
             // check if the option is not default
 
-            if (optionId !== option.default) {
+            if (!option.default) {
 
               // add option price to price variable
 
@@ -217,7 +218,7 @@
 
               // check if the option is default
 
-              if (optionId === option.default) {
+              if (option.default) {
 
                 // reduce price variable
 
@@ -225,24 +226,25 @@
                 console.log ('price decrease:', price);
               }
             }
+          }
 
-            const optionImage = thisProduct.imageWrapper.querySelector(`.${paramId}-${optionId}`);
-            console.log('.paramId-optionId:', paramId, optionId);
-            console.log ('option image:', optionImage);
+          const optionImage = thisProduct.imageWrapper.querySelector(`.${paramId}-${optionId}`);
+          console.log('.paramId-optionId:', paramId, optionId);
+          console.log ('option image:', optionImage);
 
-            if (optionImage) {
-              if (optionSelected) {
-                optionImage.classList.add(classNames.menuProduct.imageVisible);
-                console.log ('image add active:', optionImage);
-              }
-              else {
-                if (!optionSelected) {
-                  optionImage.classList.remove(classNames.menuProduct.imageVisible);
-                  console.log ('image remove active:', optionImage);
-                }
+          if (optionImage) {
+            if (optionSelected) {
+              optionImage.classList.add(classNames.menuProduct.imageVisible);
+              console.log ('image add active:', optionImage);
+            }
+            else {
+              if (!optionSelected) {
+                optionImage.classList.remove(classNames.menuProduct.imageVisible);
+                console.log ('image remove active:', optionImage);
               }
             }
           }
+
         }
       }
 
