@@ -213,18 +213,18 @@
               price += optionPrice;
               console.log ('price increase:', price);
 
+            }
+          }
+          else {
 
-            } else {
+            // check if the option is default
 
-              // check if the option is default
+            if (option.default) {
 
-              if (option.default) {
+              // reduce price variable
 
-                // reduce price variable
-
-                price -= optionPrice;
-                console.log ('price decrease:', price);
-              }
+              price -= optionPrice;
+              console.log ('price decrease:', price);
             }
           }
 
@@ -244,7 +244,6 @@
               }
             }
           }
-
         }
       }
 
