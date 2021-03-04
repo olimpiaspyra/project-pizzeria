@@ -276,7 +276,8 @@
       console.log ('constructor argument:', element);
 
       thisWidget.getElements (element);
-      thisWidget.setValue ();
+      thisWidget.setValue (value);
+      thisWidget.initActions ();
 
     }
 
@@ -290,6 +291,7 @@
     }
 
     setValue (value) {
+
       const thisWidget = this;
 
       const newValue = parseInt (value);
@@ -300,11 +302,34 @@
 
         thisWidget.value = newValue;
         thisWidget.input.value = thisWidget.value;
-
       }
     }
-  }
 
+    initActions () {
+
+      const thisWidget = this;
+
+      thisWidget.input.addEventListener ('change', function () {
+        thisWidget.setValue (thisWidget.input.value);
+      }),
+
+      thisWidget.linkDecrease.addEventListener ('click', function (event) {
+
+        event.preventDefault ();
+        thisWidget.setValue (thisWidget.value -1);
+        console.log ('click');
+
+      }),
+
+      thisWidget.linkIncrease.addEventListener ('click', function (event) {
+
+        event.preventDefault ();
+        thisWidget.setValue (thisWidget.value + 1);
+        console.log ('click');
+
+      });
+    }
+  }
   const app = {
 
     initMenu: function () {
