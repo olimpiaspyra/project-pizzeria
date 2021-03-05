@@ -268,7 +268,7 @@
     initAmountWidget () {
       const thisProduct = this;
 
-      thisProduct.AmountWidget = new AmountWidget (thisProduct.amountWidgetElem);
+      thisProduct.amountWidget = new AmountWidget (thisProduct.amountWidgetElem);
 
       thisProduct.amountWidgetElem.addEventListener ('updated', function (event) {
 
@@ -311,9 +311,10 @@
       if (thisWidget.value !== newValue && !isNaN (newValue) && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax) {
 
         thisWidget.value = newValue;
-        thisWidget.input.value = thisWidget.value;
+
 
       }
+      thisWidget.input.value = thisWidget.value;
 
       thisWidget.announce ();
 
