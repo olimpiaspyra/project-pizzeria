@@ -254,6 +254,10 @@
         }
       }
 
+      /* multiply price by amount */
+
+      price *= thisProduct.amountWidget.value;
+
       // update calculated price in the HTML
 
       thisProduct.priceElem.innerHTML = price;
@@ -266,6 +270,11 @@
 
       thisProduct.AmountWidget = new AmountWidget (thisProduct.amountWidgetElem);
 
+      thisProduct.amountWidgetElem.addEventListener ('updated', function (event) {
+
+        thisProduct.processOrder();
+
+      });
     }
   }
 
