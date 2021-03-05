@@ -265,6 +265,7 @@
       const thisProduct = this;
 
       thisProduct.AmountWidget = new AmountWidget (thisProduct.amountWidgetElem);
+
     }
   }
 
@@ -304,6 +305,9 @@
         thisWidget.input.value = thisWidget.value;
 
       }
+
+      thisWidget.announce ();
+
     }
 
     initActions () {
@@ -327,6 +331,14 @@
         thisWidget.setValue (thisWidget.value + 1);
 
       });
+    }
+
+    announce () {
+      const thisWidget = this;
+
+      const event = new Event ('updated');
+      thisWidget.element.dispatchEvent (event);
+
     }
   }
   const app = {
