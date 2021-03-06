@@ -354,7 +354,7 @@
         // create category param in params const eg. params = {ingredients {name: 'Ingredients', options: {}}} //
 
         params[paramId] = {
-          name: param.label,
+          label: param.label,
           options: {}
         };
 
@@ -478,6 +478,8 @@
 
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector (select.cart.toggleTrigger);
       console.log ('cart toggle trigger', thisCart.dom.toggleTrigger);
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector (select.cart.productList);
+      console.log ('product list', thisCart.dom.productList);
     }
 
     initActions () {
@@ -491,9 +493,15 @@
     }
 
     add (menuProduct) {
-      // const thisCart = this;
+      const thisCart = this;
 
       console.log ('adding product', menuProduct);
+
+      const generatedHTML = templates.cartProduct (menuProduct);
+
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+
+      thisCart.dom.productList.appendChild (generatedDOM);
 
     }
   }
