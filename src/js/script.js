@@ -193,6 +193,7 @@
       thisProduct.cartButton.addEventListener ('click', function (event) {
         event.preventDefault ();
         thisProduct.processOrder ();
+        thisProduct.addToCart ();
       });
     }
 
@@ -285,8 +286,14 @@
 
       price *= settings.amountWidget.defaultValue;
 
+      /* update actual price for every change option to product after init processOrder */
+
+      thisProduct.priceSingle = price;
+      console.log ('price single', thisProduct.priceSingle);
+
       // update calculated price in the HTML
 
+      thisProduct.priceMulti = price;
       thisProduct.priceElem.innerHTML = price;
       // console.log ('actual price:', thisProduct.priceElem);
 
@@ -302,6 +309,76 @@
         thisProduct.processOrder();
 
       });
+    }
+
+    addToCart () {
+      const thisProduct = this;
+
+      app.cart.add (thisProduct.prepareCartProduct());
+    }
+
+    prepareCartProduct () {
+      const thisProduct = this;
+
+      const productSummary = {
+
+        id: thisProduct.id,
+        name: thisProduct.data.name,
+        amount: settings.amountWidget.defaultValue,
+        priceSingle: thisProduct.priceSingle,
+        price:  thisProduct.priceMulti,
+        params: thisProduct.prepareCartProductParams (),
+
+      };
+
+      return productSummary;
+
+    }
+
+    prepareCartProductParams () {
+      const thisProduct = this;
+
+      const formData = utils.serializeFormToObject(thisProduct.form);
+
+      const params = {};
+
+      // for every category (param) //
+
+      for (let paramId in thisProduct.data.params) {
+
+
+        const param = thisProduct.data.params[paramId];
+        console.log ('param id:', paramId);
+        console.log ('param:', param);
+
+        // create category param in params const eg. params = {ingredients {name: 'Ingredients', options: {}}} //
+
+        params[paramId] = {
+          name: param.label,
+          options: {}
+        };
+
+        // for every option in this category //
+
+        for (let optionId in param.options) {
+
+          const option = param.options[optionId];
+          console.log ('option id:', optionId);
+          console.log ('option:', option);
+
+
+          // check if there is param with a name of paramId in formData and if it includes optionId
+
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
+
+          if (optionSelected) {
+
+            params[paramId].options = {optionId: option.label};
+
+          }
+        }
+      }
+      return params;
     }
   }
 
@@ -411,6 +488,13 @@
 
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
       });
+    }
+
+    add (menuProduct) {
+      // const thisCart = this;
+
+      console.log ('adding product', menuProduct);
+
     }
   }
 
