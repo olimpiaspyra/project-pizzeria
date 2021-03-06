@@ -355,7 +355,7 @@
 
         params[paramId] = {
           label: param.label,
-          options: {}
+          options: [],
         };
 
         // for every option in this category //
@@ -373,7 +373,7 @@
 
           if (optionSelected) {
 
-            params[paramId].options = {optionId: option.label};
+            params[paramId].options = option.push(option.label);
 
           }
         }
