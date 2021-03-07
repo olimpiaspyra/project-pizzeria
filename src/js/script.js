@@ -282,19 +282,19 @@
         }
       }
 
-      /* multiply price by amount */
-
-      price *= thisProduct.amountWidget.value;
-      console.log ('price multi', price);
-
       /* update actual price for every change option to product after init processOrder */
 
       thisProduct.priceSingle = price;
       console.log ('price single', thisProduct.priceSingle);
 
+      /* multiply price by amount */
+
+      price *= thisProduct.amountWidget.value;
+      thisProduct.priceMulti = price;
+      console.log ('price multi', price);
+
       // update calculated price in the HTML
 
-      thisProduct.priceMulti = price;
       thisProduct.priceElem.innerHTML = price;
       console.log ('actual price:', thisProduct.priceElem);
 
@@ -411,6 +411,8 @@
     setValue (value) {
 
       const thisWidget = this;
+
+      thisWidget.value = settings.amountWidget.defaultValue;
 
       const newValue = parseInt (value);
 
