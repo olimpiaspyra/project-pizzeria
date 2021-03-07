@@ -284,7 +284,8 @@
 
       /* multiply price by amount */
 
-      price *= settings.amountWidget.defaultValue;
+      price *= thisProduct.amountWidget.value;
+      console.log ('price multi', price);
 
       /* update actual price for every change option to product after init processOrder */
 
@@ -295,7 +296,7 @@
 
       thisProduct.priceMulti = price;
       thisProduct.priceElem.innerHTML = price;
-      // console.log ('actual price:', thisProduct.priceElem);
+      console.log ('actual price:', thisProduct.priceElem);
 
     }
 
@@ -324,7 +325,7 @@
 
         id: thisProduct.id,
         name: thisProduct.data.name,
-        amount: settings.amountWidget.defaultValue,
+        amount: thisProduct.amountWidget.value,
         priceSingle: thisProduct.priceSingle,
         price:  thisProduct.priceMulti,
         params: thisProduct.prepareCartProductParams (),
@@ -417,11 +418,11 @@
 
       if (thisWidget.value !== newValue && !isNaN (newValue) && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax) {
 
-        settings.amountWidget.defaultValue = newValue;
+        thisWidget.value = newValue;
 
       }
 
-      thisWidget.input.value = settings.amountWidget.defaultValue;
+      thisWidget.input.value = thisWidget.value;
 
       thisWidget.announce ();
 
@@ -438,14 +439,14 @@
       thisWidget.linkDecrease.addEventListener ('click', function (event) {
 
         event.preventDefault ();
-        thisWidget.setValue (settings.amountWidget.defaultValue -1);
+        thisWidget.setValue (thisWidget.value -1);
 
       }),
 
       thisWidget.linkIncrease.addEventListener ('click', function (event) {
 
         event.preventDefault ();
-        thisWidget.setValue (settings.amountWidget.defaultValue + 1);
+        thisWidget.setValue (thisWidget.value + 1);
 
       });
     }
@@ -572,7 +573,8 @@
 
 
         thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
-        console.log ('price inner', thisCartProduct.price);
+        console.log ('price inner', thisCartProduct.dom.price.innerHTML);
+
 
       });
 
