@@ -480,9 +480,9 @@
       thisCart.dom.wrapper = element;
 
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector (select.cart.toggleTrigger);
-      console.log ('cart toggle trigger', thisCart.dom.toggleTrigger);
+      // console.log ('cart toggle trigger', thisCart.dom.toggleTrigger);
       thisCart.dom.productList = thisCart.dom.wrapper.querySelector (select.cart.productList);
-      console.log ('product list', thisCart.dom.productList);
+      // console.log ('product list', thisCart.dom.productList);
     }
 
     initActions () {
@@ -506,8 +506,52 @@
 
       thisCart.dom.productList.appendChild (generatedDOM);
 
+      thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
+      console.log ('thisCart.products', thisCart.products);
+
     }
   }
+
+  class CartProduct {
+    constructor (menuProduct, element) {
+
+      const thisCartProduct = this;
+
+      thisCartProduct.id = menuProduct.id;
+      thisCartProduct.name = menuProduct.name;
+      thisCartProduct.params = menuProduct.params;
+      thisCartProduct.price = menuProduct.price;
+      thisCartProduct.priceSingle = menuProduct.priceSingle;
+      thisCartProduct.amount = menuProduct.amount;
+
+      thisCartProduct.getElements(element);
+      // console.log ('thisCartProduct', thisCartProduct);
+
+    }
+
+    getElements (element) {
+
+      const thisCartProduct = this;
+
+      thisCartProduct.dom = {};
+
+      thisCartProduct.dom.wrapper = element;
+
+      thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector (select.cartProduct.amountWidget);
+      console.log ('thisCartProduct.dom.amountWidget', thisCartProduct.dom.amountWidget);
+
+      thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector (select.cartProduct.price);
+      console.log ('thisCartProduct.dom.price', thisCartProduct.dom.price);
+
+      thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector (select.cartProduct.edit);
+      console.log ('thisCartProduct.dom.price', thisCartProduct.dom.edit);
+
+      thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector (select.cartProduct.remove);
+      console.log ('thisCartProduct.dom.price', thisCartProduct.dom.remove);
+
+    }
+  }
+
 
   const app = {
 
