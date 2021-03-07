@@ -348,14 +348,16 @@
 
 
         const param = thisProduct.data.params[paramId];
-        // console.log ('param id:', paramId);
-        // console.log ('param:', param);
+        console.log ('param id:', paramId);
+        console.log ('param:', param);
 
         // create category param in params const eg. params = {ingredients {name: 'Ingredients', options: {}}} //
 
         params[paramId] = {
           label: param.label,
-          options: {},
+          // options: {},
+          options: [],
+
         };
 
         // for every option in this category //
@@ -373,7 +375,9 @@
 
           if (optionSelected) {
 
-            params[paramId].options[optionId] = option.label;
+            // params[paramId].options[optionId] = option.label;
+            params[paramId].options.push(option.label);
+
           }
         }
       }
