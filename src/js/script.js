@@ -559,16 +559,20 @@
 
       thisCartProduct.amountWidget = new AmountWidget (thisCartProduct.dom.amountWidget);
 
-      thisCartProduct.dom.amountWidget.addEventListener ('update', function () {
+      thisCartProduct.dom.amountWidget.addEventListener ('updated', function () {
 
         console.log('click', thisCartProduct.dom.amountWidget);
 
         thisCartProduct.amount = thisCartProduct.amountWidget.value;
+        console.log ('amount', thisCartProduct.amount);
 
         thisCartProduct.price = thisCartProduct.amount * thisCartProduct.priceSingle;
 
-        thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
+        console.log ('price', thisCartProduct.price);
 
+
+        thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
+        console.log ('price inner', thisCartProduct.price);
 
       });
 
