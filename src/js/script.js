@@ -348,14 +348,14 @@
 
 
         const param = thisProduct.data.params[paramId];
-        console.log ('param id:', paramId);
-        console.log ('param:', param);
+        // console.log ('param id:', paramId);
+        // console.log ('param:', param);
 
         // create category param in params const eg. params = {ingredients {name: 'Ingredients', options: {}}} //
 
         params[paramId] = {
           label: param.label,
-          options: [],
+          options: {},
         };
 
         // for every option in this category //
@@ -363,8 +363,8 @@
         for (let optionId in param.options) {
 
           const option = param.options[optionId];
-          console.log ('option id:', optionId);
-          console.log ('option:', option);
+          // console.log ('option id:', optionId);
+          // console.log ('option:', option);
 
 
           // check if there is param with a name of paramId in formData and if it includes optionId
@@ -373,8 +373,7 @@
 
           if (optionSelected) {
 
-            params[paramId].options = option.push(option.label);
-
+            params[paramId].options[optionId] = option.label;
           }
         }
       }
