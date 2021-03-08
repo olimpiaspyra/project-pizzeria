@@ -486,6 +486,14 @@
       // console.log ('cart toggle trigger', thisCart.dom.toggleTrigger);
       thisCart.dom.productList = thisCart.dom.wrapper.querySelector (select.cart.productList);
       // console.log ('product list', thisCart.dom.productList);
+
+      thisCart.dom.deliveryFee = thisCart.dom.wrapper.querySelector(select.cart.deliveryFee);
+      console.log ('dom deliveryFee', thisCart.dom.deliveryFee);
+      thisCart.dom.subtotalPrice = thisCart.dom.wrapper.querySelector(select.cart.subtotalPrice);
+      console.log ('dom subtotalPrice', thisCart.dom.subtotalPrice);
+      thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelectorAll(select.cart.totalPrice);
+      thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(select.cart.totalNumber);
+
     }
 
     initActions () {
@@ -523,11 +531,11 @@
       let deliveryFee = settings.cart.defaultDeliveryFee;
       console.log ('deliveryFee', deliveryFee);
 
+      let totalNumber = 0;
+      let subtotalPrice = 0;
+
 
       for (let product of thisCart.products) {
-
-        let totalNumber = 0;
-        let subtotalPrice = 0;
 
         totalNumber += product.amount;
         console.log ('total number', totalNumber);
@@ -535,12 +543,35 @@
         console.log ('subtotal price', subtotalPrice);
 
 
-        if (totalNumber != 0) {
+
+        if (totalNumber !== 0) {
 
           thisCart.totalPrice = subtotalPrice + deliveryFee;
           console.log ('total price', thisCart.totalPrice);
 
         }
+
+        /* amount of item */
+
+        thisCart.dom.totalNumber.innerHTML = totalNumber;
+        console.log ('total number inner', thisCart.dom.totalNumber.innerHTML);
+
+
+        /* price without cost of delivery */
+
+        thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
+        console.log ('subtotal price inner', thisCart.dom.subtotalPrice.innerHTML);
+
+        /* finish price */
+
+        thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
+        console.log ('total price inner', thisCart.dom.totalPrice.innerHTML);
+
+        /* cost of delivery */
+
+        thisCart.dom.deliveryFee.innerHTML = deliveryFee;
+        console.log ('delivery inner', thisCart.dom.deliveryFee.innerHTML);
+
       }
     }
   }
@@ -600,9 +631,7 @@
         console.log ('amount', thisCartProduct.amount);
 
         thisCartProduct.price = thisCartProduct.amount * thisCartProduct.priceSingle;
-
         console.log ('price', thisCartProduct.price);
-
 
         thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
         console.log ('price inner', thisCartProduct.dom.price.innerHTML);
