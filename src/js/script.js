@@ -492,6 +492,7 @@
       thisCart.dom.subtotalPrice = thisCart.dom.wrapper.querySelector(select.cart.subtotalPrice);
       console.log ('dom subtotalPrice', thisCart.dom.subtotalPrice);
       thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelectorAll(select.cart.totalPrice);
+      console.log ('dom totalPrice', thisCart.dom.totalPrice);
       thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(select.cart.totalNumber);
 
     }
@@ -564,9 +565,13 @@
 
         /* finish price */
 
-        thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
-        console.log ('total price inner', thisCart.dom.totalPrice.innerHTML);
+        for (let i = 0; i < thisCart.dom.totalPrice.length; i++) {
 
+          thisCart.dom.totalPrice[i].innerHTML = thisCart.totalPrice;
+          console.log ('total price inner', thisCart.dom.totalPrice[i].innerHTML);
+
+        }
+        
         /* cost of delivery */
 
         thisCart.dom.deliveryFee.innerHTML = deliveryFee;
