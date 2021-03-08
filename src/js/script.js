@@ -456,7 +456,10 @@
     announce () {
       const thisWidget = this;
 
-      const event = new Event ('updated');
+      const event = new CustomEvent ('updated', {
+        bubbles: true
+      });
+
       thisWidget.element.dispatchEvent (event);
 
     }
@@ -504,6 +507,10 @@
         // console.log ('click');
 
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
+      });
+
+      thisCart.dom.productList.addEventListener ('updated', function () {
+        thisCart.update ();
       });
     }
 
@@ -571,7 +578,7 @@
           console.log ('total price inner', thisCart.dom.totalPrice[i].innerHTML);
 
         }
-        
+
         /* cost of delivery */
 
         thisCart.dom.deliveryFee.innerHTML = deliveryFee;
