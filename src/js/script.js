@@ -512,6 +512,36 @@
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
       console.log ('thisCart.products', thisCart.products);
 
+      thisCart.update ();
+
+    }
+
+    update () {
+
+      const thisCart = this;
+
+      let deliveryFee = settings.cart.defaultDeliveryFee;
+      console.log ('deliveryFee', deliveryFee);
+
+
+      for (let product of thisCart.products) {
+
+        let totalNumber = 0;
+        let subtotalPrice = 0;
+
+        totalNumber += product.amount;
+        console.log ('total number', totalNumber);
+        subtotalPrice += product.price;
+        console.log ('subtotal price', subtotalPrice);
+
+
+        if (totalNumber != 0) {
+
+          thisCart.totalPrice = subtotalPrice + deliveryFee;
+          console.log ('total price', thisCart.totalPrice);
+
+        }
+      }
     }
   }
 
@@ -577,9 +607,7 @@
         thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
         console.log ('price inner', thisCartProduct.dom.price.innerHTML);
 
-
       });
-
     }
   }
 
