@@ -547,6 +547,7 @@
 
       let totalNumber = 0;
       let subtotalPrice = 0;
+      thisCart.totalPrice = 0;
 
 
       for (let product of thisCart.products) {
@@ -565,37 +566,37 @@
 
         } else {
 
-          thisCart.totalPrice = 0;
           deliveryFee = 0;
+          thisCart.totalPrice = 0;
 
         }
+      }
 
-        /* amount of item */
+      /* amount of item */
 
-        thisCart.dom.totalNumber.innerHTML = totalNumber;
-        console.log ('total number inner', thisCart.dom.totalNumber.innerHTML);
+      thisCart.dom.totalNumber.innerHTML = totalNumber;
+      console.log ('total number inner', thisCart.dom.totalNumber.innerHTML);
 
 
-        /* price without cost of delivery */
+      /* price without cost of delivery */
 
-        thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
-        console.log ('subtotal price inner', thisCart.dom.subtotalPrice.innerHTML);
+      thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
+      console.log ('subtotal price inner', thisCart.dom.subtotalPrice.innerHTML);
 
-        /* finish price */
+      /* finish price */
 
-        for (let i = 0; i < thisCart.dom.totalPrice.length; i++) {
+      for (let i = 0; i < thisCart.dom.totalPrice.length; i++) {
 
-          thisCart.dom.totalPrice[i].innerHTML = thisCart.totalPrice;
-          console.log ('total price inner', thisCart.dom.totalPrice[i].innerHTML);
-
-        }
-
-        /* cost of delivery */
-
-        thisCart.dom.deliveryFee.innerHTML = deliveryFee;
-        console.log ('delivery inner', thisCart.dom.deliveryFee.innerHTML);
+        thisCart.dom.totalPrice[i].innerHTML = thisCart.totalPrice;
+        console.log ('total price inner', thisCart.dom.totalPrice[i].innerHTML);
 
       }
+
+      /* cost of delivery */
+
+      thisCart.dom.deliveryFee.innerHTML = deliveryFee;
+      console.log ('delivery inner', thisCart.dom.deliveryFee.innerHTML);
+
     }
 
     remove (cartProduct) {
