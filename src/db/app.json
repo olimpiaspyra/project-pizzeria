@@ -263,5 +263,19 @@
       ]
     }
   ],
-  "booking": []
+  "booking": [
+    {
+      "id": 3,
+      "date": "2021-03-24",
+      "hour": "15:00",
+      "table": 3,
+      "repeat": "daily",
+      "duration": 2,
+      "ppl": 3,
+      "starters": [
+        "bread",
+        "lemonWater"
+      ]
+    }
+  ]
 }
