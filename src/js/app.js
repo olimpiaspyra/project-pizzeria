@@ -12,7 +12,7 @@ const app = {
     thisApp.navLinks = document.querySelectorAll (select.nav.links);
 
     const idFromHash = window.location.hash.replace ('#/', '');
-    console.log ('id from hash', idFromHash);
+    // console.log ('id from hash', idFromHash);
 
     let pageMatchingHash = thisApp.pages[0].id;
 
@@ -26,7 +26,7 @@ const app = {
       }
     }
 
-    console.log ('page matching hash', pageMatchingHash);
+    // console.log ('page matching hash', pageMatchingHash);
 
     thisApp.activatePage (pageMatchingHash);
 
@@ -151,7 +151,7 @@ const app = {
     const thisApp = this;
 
     const containerBooking = document.querySelector (select.containerOf.booking);
-    console.log ('container booking', containerBooking);
+    // console.log ('container booking', containerBooking);
 
     thisApp.booking = new Booking (containerBooking);
 
