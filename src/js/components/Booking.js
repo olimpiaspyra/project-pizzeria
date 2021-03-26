@@ -9,6 +9,8 @@ class Booking {
 
     const thisBooking = this;
 
+    thisBooking.reservationTable = '';
+
     thisBooking.render (element);
     thisBooking.initWidgets ();
     thisBooking.getData ();
@@ -125,6 +127,40 @@ class Booking {
     }
   }
 
+  initTables (event) {
+    const thisBooking = this;
+
+    const clickedElement = event.target;
+
+    const tableId = clickedElement.getAttribute (settings.booking.tableIdAttribute);
+
+    if (clickedElement.classList.contains (tableId)) {
+
+      if (!clickedElement.classList.contains (classNames.booking.tableBooked)) {
+
+        thisBooking.reservationTable = tableId;
+
+      } else {
+
+        alert ('Stolik niedostępny');
+
+      }
+
+      for (let table of thisBooking.dom.tables) {
+
+        if (clickedElement.classList.contains (tableId) && thisBooking.reservationTable === tableId) {
+          clickedElement.classList.add (classNames.booking.tableSelected);
+          thisBooking.reservationTable = tableId;
+
+        } else {
+
+          clickedElement.classList.remove (classNames.booking.tableSelected);
+          thisBooking.reservationTable = '';
+
+        }
+      }}
+  }
+
   updateDOM () {
     const thisBooking = this;
 
@@ -177,6 +213,12 @@ class Booking {
 
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll (select.booking.tables);
 
+    thisBooking.dom.selectTable = thisBooking.dom.wrapper.querySelectorAll (select.booking.tables);
+    console.log ('select table', thisBooking.dom.selectTable);
+
+    thisBooking.dom.planTable = thisBooking.dom.wrapper.querySelector (select.booking.planTable);
+    console.log ('plan table', thisBooking.dom.planTable);
+
   }
 
   initWidgets () {
@@ -200,6 +242,11 @@ class Booking {
 
     thisBooking.dom.wrapper.addEventListener ('updated', function () {
       thisBooking.updateDOM ();
+    });
+
+    thisBooking.dom.planTable.addEventListener ('click', function (event) {
+      console.log ('click');
+      thisBooking.initTables (event);
     });
   }
 }
