@@ -62,6 +62,8 @@ export const select = {
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
     planTable: '.floor-plan',
+    starters: '[name="starter"]',
+    bookTable: '.btn-secondary',
   },
   nav: {
     links: '.main-nav a',
