@@ -134,31 +134,30 @@ class Booking {
 
     const tableId = clickedElement.getAttribute (settings.booking.tableIdAttribute);
 
-    if (clickedElement.classList.contains (tableId)) {
+    if (clickedElement.classList.contains (classNames.booking.tableBooked)) {
 
-      if (!clickedElement.classList.contains (classNames.booking.tableBooked)) {
+      alert ('Stolik niedostępny');
 
-        thisBooking.reservationTable = tableId;
+    } else {
+
+      if (clickedElement.classList.contains (classNames.booking.tableSelected)) {
+
+        clickedElement.classList.remove (classNames.booking.tableSelected);
+        thisBooking.reservationTable = '';
 
       } else {
 
-        alert ('Stolik niedostępny');
+        for (let table of thisBooking.dom.tables) {
 
-      }
-
-      for (let table of thisBooking.dom.tables) {
-
-        if (clickedElement.classList.contains (tableId) && thisBooking.reservationTable === tableId) {
-          clickedElement.classList.add (classNames.booking.tableSelected);
-          thisBooking.reservationTable = tableId;
-
-        } else {
-
-          clickedElement.classList.remove (classNames.booking.tableSelected);
-          thisBooking.reservationTable = '';
+          table.classList.remove (classNames.booking.tableSelected);
 
         }
-      }}
+
+        clickedElement.classList.add (classNames.booking.tableSelected);
+        thisBooking.reservationTable = tableId;
+
+      }
+    }
   }
 
   updateDOM () {

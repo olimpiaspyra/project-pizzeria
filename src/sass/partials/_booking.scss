@@ -171,11 +171,11 @@
         background: $color-dark;
         opacity: 0.4;
       }
+    }
 
       &.selected {
         cursor: not-allowed;
         color: lighten($color-dark, 40%);
-      }
 
       &::after {
         position: absolute;
@@ -190,6 +190,7 @@
       }
     }
   }
+
 
   [data-table="1"] {
     left: 40px;
