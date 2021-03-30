@@ -258,29 +258,28 @@ class Booking {
 
     thisBooking.dom.starters.addEventListener ('click', function (event) {
 
-      console.log ('click');
-
       const clickedElement = event.target;
       console.log ('clicked element', clickedElement);
 
-      if (clickedElement.tagName === 'INPUT' && clickedElement.type === 'checkbox' && clickedElement.name === 'starter') {
+      for (let clickedElement of thisBooking.starters) {
+        if (clickedElement.tagName === 'INPUT' && clickedElement.type === 'checkbox' && clickedElement.name === 'starter') {
 
-        console.log (clickedElement.value);
+          console.log (clickedElement.value);
 
-        if (clickedElement.checked) {
+          if (clickedElement.checked) {
 
-          thisBooking.starters.push (clickedElement.value);
-          console.log (thisBooking.starters);
-        }
+            thisBooking.starters.push (clickedElement.value);
+            console.log (thisBooking.starters);
+          }
 
-        else {
+          else {
 
-          const indexOfStarters = thisBooking.starters.indexOf (clickedElement.value);
-          thisBooking.starters.splice (indexOfStarters, 1);
-          console.log (thisBooking.starters);
+            const indexOfStarters = thisBooking.starters.indexOf (clickedElement.value);
+            thisBooking.starters.splice (indexOfStarters, 1);
+            console.log (thisBooking.starters);
 
-        }}
-    });
+          }}
+      }});
   }
 
   sendBooking () {
@@ -312,7 +311,8 @@ class Booking {
       },
       body: JSON.stringify(payload),
     };
-    fetch(url, options);
+    fetch (url, options)
+      .then(thisBooking.makeBooked (payload.date, payload.hour, payload.duration, payload.table));
   }
 }
 

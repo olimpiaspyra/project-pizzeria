@@ -173,9 +173,9 @@
       }
     }
 
-      &.selected {
-        cursor: not-allowed;
-        color: lighten($color-dark, 40%);
+    &.selected {
+      cursor: not-allowed;
+      color: lighten($color-dark, 40%);
 
       &::after {
         position: absolute;
