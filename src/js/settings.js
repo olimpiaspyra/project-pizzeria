@@ -62,7 +62,7 @@ export const select = {
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
     planTable: '.floor-plan',
-    starters: '[name="starter"]',
+    starters: '.starters .booking-option-title',
     bookTable: '.btn-secondary',
   },
   nav: {

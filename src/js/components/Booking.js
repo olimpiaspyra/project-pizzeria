@@ -10,6 +10,7 @@ class Booking {
     const thisBooking = this;
 
     thisBooking.reservationTable = '';
+    thisBooking.starters = [];
 
     thisBooking.render (element);
     thisBooking.initWidgets ();
@@ -184,6 +185,7 @@ class Booking {
         table.classList.add (classNames.booking.tableBooked);
       } else {
         table.classList.remove (classNames.booking.tableBooked);
+        table.classList.remove (classNames.booking.tableSelected);
       }
     }
   }
@@ -224,7 +226,7 @@ class Booking {
     thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector (select.cart.phone);
     console.log ('phone', thisBooking.dom.phone);
 
-    thisBooking.dom.starters = thisBooking.dom.wrapper.querySelectorAll (select.booking.starters);
+    thisBooking.dom.starters = thisBooking.dom.wrapper.querySelector (select.booking.starters);
     console.log ('starters', thisBooking.dom.starters);
 
     thisBooking.dom.bookTable = thisBooking.dom.wrapper.querySelector (select.booking.bookTable);
@@ -261,25 +263,24 @@ class Booking {
       const clickedElement = event.target;
       console.log ('clicked element', clickedElement);
 
-      for (let clickedElement of thisBooking.starters) {
-        if (clickedElement.tagName === 'INPUT' && clickedElement.type === 'checkbox' && clickedElement.name === 'starter') {
+      if (clickedElement.tagName === 'INPUT' && clickedElement.type === 'checkbox' && clickedElement.name === 'starter') {
 
-          console.log (clickedElement.value);
+        console.log (clickedElement.value);
 
-          if (clickedElement.checked) {
+        if (clickedElement.checked) {
 
-            thisBooking.starters.push (clickedElement.value);
-            console.log (thisBooking.starters);
-          }
+          thisBooking.starters.push (clickedElement.value);
+          console.log (thisBooking.starters);
+        }
 
-          else {
+        else {
 
-            const indexOfStarters = thisBooking.starters.indexOf (clickedElement.value);
-            thisBooking.starters.splice (indexOfStarters, 1);
-            console.log (thisBooking.starters);
+          const indexOfStarters = thisBooking.starters.indexOf (clickedElement.value);
+          thisBooking.starters.splice (indexOfStarters, 1);
+          console.log (thisBooking.starters);
 
-          }}
-      }});
+        }}
+    });
   }
 
   sendBooking () {
@@ -289,10 +290,10 @@ class Booking {
 
     const payload = {
       date: thisBooking.date,
-      hour: thisBooking.hour,
-      table: parseInt (thisBooking.selectTable),
-      duration: parseInt (thisBooking.AmountWidget.value),
-      ppl:  parseInt (thisBooking.dom.peopleAmount.value),
+      hour: thisBooking.hourPicker.value,
+      table: parseInt (thisBooking.reservationTable),
+      duration: parseInt ( thisBooking.hoursAmount.value),
+      ppl:  parseInt (thisBooking.peopleAmount.value),
       starters: [],
       phone: thisBooking.dom.phone.value,
       address: thisBooking.dom.address.value,
@@ -312,7 +313,9 @@ class Booking {
       body: JSON.stringify(payload),
     };
     fetch (url, options)
-      .then(thisBooking.makeBooked (payload.date, payload.hour, payload.duration, payload.table));
+      .then (function () {
+        thisBooking.makeBooked (payload.date, payload.hour, payload.duration, payload.table);});
+
   }
 }
 
