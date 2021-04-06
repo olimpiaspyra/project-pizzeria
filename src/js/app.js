@@ -10,7 +10,10 @@ const app = {
     const thisApp = this;
 
     thisApp.pages = document.querySelector (select.containerOf.pages).children;
+    console.log ('pages',  thisApp.pages);
     thisApp.navLinks = document.querySelectorAll (select.nav.links);
+    thisApp.boxLinks = document.querySelector (select.home.boxLinks);
+    console.log ('box links', thisApp.boxLinks);
 
     const idFromHash = window.location.hash.replace ('#/', '');
     // console.log ('id from hash', idFromHash);
@@ -48,6 +51,23 @@ const app = {
 
         /* change URL hash */
 
+        window.location.hash = '#/' + id;
+
+      });
+    }
+
+    for (let link of thisApp.boxLinks) {
+
+      link.addEventListener ('click', function (event) {
+        console.log ('click');
+
+        event.preventDefault ();
+
+        const clickedElement = this;
+
+        const id = clickedElement.getAttribute ('href').replace ('#', '');
+
+        thisApp.activatePage (id);
         window.location.hash = '#/' + id;
 
       });

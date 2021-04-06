@@ -76,7 +76,8 @@ export const select = {
   home: {
     orderOnline: '.home-order',
     bookTable: '.home-booking',
-  }
+    boxLinks: '.home-row a',
+  },
 };
 
 export const classNames = {
