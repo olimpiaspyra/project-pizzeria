@@ -11,9 +11,12 @@ const app = {
 
     thisApp.pages = document.querySelector (select.containerOf.pages).children;
     console.log ('pages',  thisApp.pages);
-    thisApp.navLinks = document.querySelectorAll (select.nav.links);
-    thisApp.boxLinks = document.querySelector (select.home.boxLinks);
-    console.log ('box links', thisApp.boxLinks);
+    // thisApp.navLinks = document.querySelectorAll (select.nav.links);
+    // console.log (thisApp.navLinks);
+    // thisApp.boxLinks = document.querySelectorAll (select.home.boxLinks);
+    // console.log (thisApp.boxLinks);
+    thisApp.links = document.querySelectorAll ('.main-nav a, .home-row a');
+
 
     const idFromHash = window.location.hash.replace ('#/', '');
     // console.log ('id from hash', idFromHash);
@@ -34,7 +37,7 @@ const app = {
 
     thisApp.activatePage (pageMatchingHash);
 
-    for (let link of thisApp.navLinks) {
+    for (let link of thisApp.links) {
 
       link.addEventListener ('click', function (event) {
 
@@ -56,22 +59,27 @@ const app = {
       });
     }
 
-    for (let link of thisApp.boxLinks) {
+    // for (let link of thisApp.boxLinks) {
 
-      link.addEventListener ('click', function (event) {
-        console.log ('click');
+    //   link.addEventListener ('click', function (event) {
 
-        event.preventDefault ();
+    //     const clickedElement = this;
+    //     event.preventDefault ();
 
-        const clickedElement = this;
+    //     /* get page id from href attribute */
 
-        const id = clickedElement.getAttribute ('href').replace ('#', '');
+    //     const id = clickedElement.getAttribute ('href').replace ('#', '');
 
-        thisApp.activatePage (id);
-        window.location.hash = '#/' + id;
+    //     /* run thisApp activatePage with that id */
 
-      });
-    }
+    //     thisApp.activatePage (id);
+
+    //     /* change URL hash */
+
+    //     window.location.hash = '#/' + id;
+
+    //   });
+    // }
   },
 
   activatePage: function (pageId) {
@@ -93,7 +101,7 @@ const app = {
 
     /* add class 'active to matching links, remove from non-matching */
 
-    for (let link of thisApp.navLinks) {
+    for (let link of thisApp.links) {
 
       link.classList.toggle (
         classNames.nav.active,
@@ -161,11 +169,11 @@ const app = {
     // console.log('settings:', settings);
     // console.log('templates:', templates);
 
-    thisApp.initPages();
     thisApp.initData();
     thisApp.initCart();
-    thisApp.initBooking();
     thisApp.initHome();
+    thisApp.initPages();
+    thisApp.initBooking();
 
   },
 
