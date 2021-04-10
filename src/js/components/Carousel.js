@@ -18,13 +18,15 @@ class Carousel {
   initPlugin () {
     const thisCarousel = this;
 
-    // eslint-disable-next-line no-undef
-    new Flickity (thisCarousel.container, {
-      cellAlign: 'left',
-      contain: true,
-      prevNextButtons: false,
-      autoPlay: 3000,
-    });
+    setTimeout (function() {
+      // eslint-disable-next-line no-undef
+      new Flickity (thisCarousel.container, {
+        cellAlign: 'left',
+        contain: true,
+        prevNextButtons: false,
+        autoPlay: 3000,
+      });
+    }, 0);
   }
 }
 

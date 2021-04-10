@@ -134,11 +134,12 @@
 
 .carousel-cell {
   display: flex;
+  height: 100%;
   width: 100%;
 }
 
 .carousel-image {
-  height: 200px;
+  flex: 1 0 200px;
   width: 200px;
   margin-right: 20px;
   border-radius: 5px;

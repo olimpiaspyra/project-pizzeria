@@ -14,9 +14,9 @@ const app = {
     // thisApp.navLinks = document.querySelectorAll (select.nav.links);
     // console.log (thisApp.navLinks);
     // thisApp.boxLinks = document.querySelectorAll (select.home.boxLinks);
-    // console.log (thisApp.boxLinks);
-    thisApp.links = document.querySelectorAll ('.main-nav a, .home-row a');
-
+    // // console.log (thisApp.boxLinks);
+    // thisApp.links = document.querySelectorAll ('.main-nav a, .home-row a');
+    thisApp.links = document.querySelectorAll (select.home.boxLinks + ', ' + select.nav.links);
 
     const idFromHash = window.location.hash.replace ('#/', '');
     // console.log ('id from hash', idFromHash);
